@@ -1,0 +1,30 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    archive-tar-minitar (0.5.2)
+    erubis (2.7.0)
+    ffi (0.6.3-java)
+    jenkins-plugin-runtime (0.1.8)
+      json
+    json (1.6.1-java)
+    mario (0.0.6)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-ssh (2.2.1)
+    vagrant (0.5.4)
+      archive-tar-minitar (= 0.5.2)
+      erubis (>= 2.6.6)
+      json (>= 1.4.3)
+      mario (~> 0.0.6)
+      net-scp (>= 1.0.2)
+      net-ssh (>= 2.0.19)
+      virtualbox (~> 0.7.3)
+    virtualbox (0.7.9)
+      ffi (~> 0.6.3)
+
+PLATFORMS
+  java
+
+DEPENDENCIES
+  jenkins-plugin-runtime (~> 0.1.8)
+  vagrant
