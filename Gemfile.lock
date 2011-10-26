@@ -1,16 +1,31 @@
+GIT
+  remote: git://github.com/jorgenpt/jenkins-plugin-runtime.git
+  revision: 4d44d4875006ef38400c4df78b7aaeb5ae1a9aec
+  branch: bump-version
+  specs:
+    jenkins-plugin-runtime (0.1.9)
+      json
+
 GEM
   remote: http://rubygems.org/
   specs:
     archive-tar-minitar (0.5.2)
     erubis (2.7.0)
     ffi (0.6.3-java)
-    jenkins-plugin-runtime (0.1.8)
-      json
+    jenkins-plugin (0.1.13)
+      bundler
+      jenkins-plugin-runtime (~> 0.1.6)
+      jenkins-war (>= 1.427)
+      rubyzip
+      thor
+    jenkins-war (1.434)
     json (1.6.1-java)
     mario (0.0.6)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-ssh (2.2.1)
+    rubyzip (0.9.4)
+    thor (0.14.6)
     vagrant (0.5.4)
       archive-tar-minitar (= 0.5.2)
       erubis (>= 2.6.6)
@@ -26,5 +41,6 @@ PLATFORMS
   java
 
 DEPENDENCIES
-  jenkins-plugin-runtime (~> 0.1.8)
+  jenkins-plugin
+  jenkins-plugin-runtime!
   vagrant
