@@ -17,8 +17,9 @@ class VagrantWrapper < Jenkins::Tasks::BuildWrapper
     listener.info("Running Vagrant with version: #{Vagrant::VERSION}")
     listener.info "Bringing Vagrant box up for build"
     listener.info("Build object ID in builder: #{build.object_id}")
+    native = Jenkins::Plugin.instance.export(self)
     # FFFFUUU
-    #makeBuildVariables(build, {"foo" => "bar"})
+    native.makeBuildVariables(build.instance_variable_get(:@native), {"foo" => "bar"})
     #@vagrant = Vagrant::Environment.new.load!
     #@vagrant.primary_vm.up
     true
