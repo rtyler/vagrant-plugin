@@ -1,0 +1,10 @@
+<%
+=begin
+  These taglib docs are kind of useful: <http://jenkins-ci.org/maven-site/hudson-core/jelly-taglib-ref.html>
+=end
+%>
+
+<% f = taglib("/lib/form") %>
+<% f.entry(:title => "Command", :field => "command") do %>
+  <% f.textarea %>
+<% end %>

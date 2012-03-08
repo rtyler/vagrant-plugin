@@ -1,12 +1,9 @@
-source :rubygems
+source :gemcutter
 
-# Pulling jorgenpt@'s jenkins-plugin-runtime which has some useful buildwrapper
-# additions
-gem "jenkins-plugin-runtime",
-          :git => 'git://github.com/jorgenpt/jenkins-plugin-runtime.git',
-          :branch => 'bump-version'
+gem "jenkins-plugin-runtime"
+gem "jenkins-plugin", '~> 0.2.0'
+gem "vagrant", '~> 1.0'
 
-gem "jenkins-plugin"
-
-gem "vagrant"
-#gem "virtualbox", :git => "git://github.com/mitchellh/virtualbox.git"
+group :development do
+  gem 'jpi', '~> 0.3.3'
+end

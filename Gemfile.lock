@@ -1,46 +1,48 @@
-GIT
-  remote: git://github.com/jorgenpt/jenkins-plugin-runtime.git
-  revision: 4d44d4875006ef38400c4df78b7aaeb5ae1a9aec
-  branch: bump-version
-  specs:
-    jenkins-plugin-runtime (0.1.9)
-      json
-
 GEM
   remote: http://rubygems.org/
   specs:
     archive-tar-minitar (0.5.2)
+    childprocess (0.3.1)
+      ffi (~> 1.0.6)
     erubis (2.7.0)
-    ffi (0.6.3-java)
-    jenkins-plugin (0.1.13)
-      bundler
-      jenkins-plugin-runtime (~> 0.1.6)
+    ffi (1.0.11)
+    ffi (1.0.11-java)
+    i18n (0.6.0)
+    jenkins-plugin (0.2.0)
+    jenkins-plugin-runtime (0.1.26)
+      json
+      slop (~> 3.0.2)
+    jenkins-war (1.447)
+    jpi (0.3.3)
+      bundler (~> 1.1.rc2)
+      jenkins-plugin-runtime (~> 0.1.13)
       jenkins-war (>= 1.427)
       rubyzip
       thor
-    jenkins-war (1.434)
-    json (1.6.1-java)
-    mario (0.0.6)
+    json (1.5.4)
+    json (1.5.4-java)
+    log4r (1.1.10)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
-    net-ssh (2.2.1)
-    rubyzip (0.9.4)
+    net-ssh (2.2.2)
+    rubyzip (0.9.6.1)
+    slop (3.0.4)
     thor (0.14.6)
-    vagrant (0.5.4)
+    vagrant (1.0.0)
       archive-tar-minitar (= 0.5.2)
-      erubis (>= 2.6.6)
-      json (>= 1.4.3)
-      mario (~> 0.0.6)
-      net-scp (>= 1.0.2)
-      net-ssh (>= 2.0.19)
-      virtualbox (~> 0.7.3)
-    virtualbox (0.7.9)
-      ffi (~> 0.6.3)
+      childprocess (~> 0.3.1)
+      erubis (~> 2.7.0)
+      i18n (~> 0.6.0)
+      json (~> 1.5.1)
+      log4r (~> 1.1.9)
+      net-scp (~> 1.0.4)
+      net-ssh (~> 2.2.2)
 
 PLATFORMS
   java
 
 DEPENDENCIES
-  jenkins-plugin
-  jenkins-plugin-runtime!
-  vagrant
+  jenkins-plugin (~> 0.2.0)
+  jenkins-plugin-runtime
+  jpi (~> 0.3.3)
+  vagrant (~> 1.0)
