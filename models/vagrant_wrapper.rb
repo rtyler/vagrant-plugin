@@ -21,9 +21,9 @@ module Vagrant
 
     # Called some time before the build is to start.
     def setup(build, launcher, listener)
-      path = File.join(path_to_vagrantfile(build), 'Vagrantfile')
+      path = path_to_vagrantfile(build)
 
-      unless File.exists? path
+      unless File.exists? File.join(path, 'Vagrantfile')
         listener.info("There is no Vagrantfile in your workspace!")
         listener.info("We looked in: #{path}")
         build.native.setResult(Java.hudson.model.Result::NOT_BUILT)
