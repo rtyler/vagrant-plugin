@@ -1,0 +1,6 @@
+pkg
+work
+vagrant-test
+*.war
+*.swp
+.rvmrc
