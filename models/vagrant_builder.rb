@@ -92,6 +92,7 @@ module Vagrant
         build.halt 'Vagrant VM doesn\'t appear to be running!'
       end
 
+      listener.info('Provisioning the Vagrant VM.. (this may take a while)')
       @vagrant.cli('provision')
     end
   end
