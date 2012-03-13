@@ -7,14 +7,19 @@ class BaseVagrantBuilder < Jenkins::Tasks::Builder
 
   def initialize(attrs)
     @command = attrs["command"]
-    @vagrant = nil
   end
 
   def prebuild(build, listener)
   end
 
   def perform(build, launcher, listener)
-    @vagrant = Vagrant::Environment.new(:cwd => build.workspace.to_s)
+    # This should be set by the VagrantWrapper
+    @vagrant = build.env[:vagrant]
+
+    if @vagrant.nil?
+      build.halt "OH CRAP! I don't seem to have a Vagrant instance!"
+    end
+
     unless @vagrant.primary_vm.state == :running
       build.halt 'Vagrant VM doesn\'t appear to be running!'
     end
@@ -58,7 +63,11 @@ class VagrantProvisionBuilder < Jenkins::Tasks::Builder
   display_name 'Provision the Vagrant machine'
 
   def perform(build, launcher, listener)
-    @vagrant = Vagrant::Environment.new(:cwd => build.workspace.to_s)
+    @vagrant = build.env[:vagrant]
+    if @vagrant.nil?
+      built.halt "OH CRAP! I don't seem to have a Vagrant instance"
+    end
+
     unless @vagrant.primary_vm.state == :running
       build.halt 'Vagrant VM doesn\'t appear to be running!'
     end

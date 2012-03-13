@@ -1,0 +1,10 @@
+<%
+f = taglib("/lib/form")
+f.block do
+    f.entry(:title => 'Path to Vagrantfile',
+            :field => 'vagrantfile',
+            :description => 'Alternate path, relative to workspace root, to Vagrantfile (<em>only needed if the Vagrantfile is not in the root directory</em>)') do
+        f.textbox
+    end
+end
+%>
