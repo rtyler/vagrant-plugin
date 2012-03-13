@@ -2,7 +2,7 @@
 Jenkins::Plugin::Specification.new do |plugin|
   plugin.name = 'vagrant-plugin'
   plugin.display_name = 'Vagrant Plugin'
-  plugin.version = '0.0.3'
+  plugin.version = '0.1.0'
   plugin.description = 'The Vagrant plugin allows you to bring up a Vagrant VM for the duration of your job'
 
   plugin.url = 'https://wiki.jenkins-ci.org/display/JENKINS/Vagrant+Plugin'
