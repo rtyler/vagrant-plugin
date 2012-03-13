@@ -6,4 +6,4 @@ Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Android+Emulator+Plugin)
 maintained by [Christopher Orr](https://github.com/orrc).
 
 
-![A Screenshot](http://strongspace.com/rtyler/public/vagrant-plugin-yay.png)
+![A Screenshot](http://agentdero.cachefly.net/scratch/vagrant-plugin-0.0.3.png)
