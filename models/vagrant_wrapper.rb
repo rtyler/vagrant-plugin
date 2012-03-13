@@ -22,7 +22,7 @@ class VagrantWrapper < Jenkins::Tasks::BuildWrapper
     listener.info("Running Vagrant with version: #{Vagrant::VERSION}")
     @vagrant = Vagrant::Environment.new(:cwd => build.workspace.to_s)
     listener.info "Vagrantfile loaded, bringing Vagrant box up for the build"
-    @vagrant.cli('up')
+    @vagrant.cli('up', '--no-provision')
     listener.info "Vagrant box is online, continuing with the build"
   end
 

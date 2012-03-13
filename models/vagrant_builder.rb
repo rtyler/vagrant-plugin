@@ -53,3 +53,16 @@ class VagrantSudoBuilder < BaseVagrantBuilder
     :sudo
   end
 end
+
+class VagrantProvisionBuilder < Jenkins::Tasks::Builder
+  display_name 'Provision the Vagrant machine'
+
+  def perform(build, launcher, listener)
+    @vagrant = Vagrant::Environment.new(:cwd => build.workspace.to_s)
+    unless @vagrant.primary_vm.state == :running
+      build.halt 'Vagrant VM doesn\'t appear to be running!'
+    end
+
+    @vagrant.cli('provision')
+  end
+end
