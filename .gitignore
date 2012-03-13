@@ -3,4 +3,5 @@ work
 vagrant-test
 *.war
 *.swp
+*.swn
 .rvmrc
