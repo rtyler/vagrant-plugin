@@ -1,3 +1,18 @@
+GIT
+  remote: git://github.com/rtyler/vagrant
+  revision: 95ebd5b4ca7c2bbff2c5a5d5d95eaa22ad0f52db
+  ref: 95ebd5b
+  specs:
+    vagrant (1.0.1)
+      archive-tar-minitar (= 0.5.2)
+      childprocess (~> 0.3.1)
+      erubis (~> 2.7.0)
+      i18n (~> 0.6.0)
+      json (~> 1.5.1)
+      log4r (~> 1.1.9)
+      net-scp (~> 1.0.4)
+      net-ssh (~> 2.2.2)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -37,15 +52,6 @@ GEM
     rubyzip (0.9.6.1)
     slop (3.0.4)
     thor (0.14.6)
-    vagrant (1.0.1)
-      archive-tar-minitar (= 0.5.2)
-      childprocess (~> 0.3.1)
-      erubis (~> 2.7.0)
-      i18n (~> 0.6.0)
-      json (~> 1.5.1)
-      log4r (~> 1.1.9)
-      net-scp (~> 1.0.4)
-      net-ssh (~> 2.2.2)
 
 PLATFORMS
   java
@@ -56,4 +62,4 @@ DEPENDENCIES
   jpi (~> 0.3.3)
   rake
   rspec
-  vagrant (~> 1.0.1)
+  vagrant!
