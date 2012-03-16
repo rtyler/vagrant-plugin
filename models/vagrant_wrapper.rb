@@ -68,12 +68,20 @@ module Vagrant
       listener.info "Vagrant box is online, continuing with the build"
 
       build.env[:vagrant] = @vagrant
+      # We use this variable to determine if we have changes worth packaging,
+      # i.e. if we have actually done anything with the box, we will mark it
+      # dirty and can then take further action based on that
+      build.env[:vagrant_dirty] = false
     end
 
     # Called some time when the build is finished.
     def teardown(build, listener)
-      listener.info "Build finished, destroying the Vagrant box"
-      unless @vagrant.nil?
+      if @vagrant.nil?
+        return
+      end
+
+      unless build.env[:vagrant_disable_destroy]
+        listener.info "Build finished, destroying the Vagrant box"
         @vagrant.cli('destroy', '-f')
       end
     end

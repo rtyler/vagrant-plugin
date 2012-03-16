@@ -25,6 +25,7 @@ module Vagrant
       end
 
       unless @vagrant.nil?
+        build.env[:vagrant_dirty] = true
         code = @vagrant.primary_vm.channel.send(vagrant_method, @command) do |type, data|
           # type is one of [:stdout, :stderr, :exit_status]
       #   # data is a string for stdout/stderr and an int for exit status
@@ -93,6 +94,7 @@ module Vagrant
       end
 
       listener.info('Provisioning the Vagrant VM.. (this may take a while)')
+      build.env[:vagrant_dirty] = true
       @vagrant.cli('provision')
     end
   end

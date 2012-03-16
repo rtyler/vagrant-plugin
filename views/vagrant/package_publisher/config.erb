@@ -1,0 +1,10 @@
+<%
+f = taglib("/lib/form")
+f.block do
+    f.entry(:title => 'Name of .box file (optional)',
+            :field => 'boxname',
+            :description => 'Name to give the .box file packaged by Vagrant') do
+        f.textbox
+    end
+end
+%>
