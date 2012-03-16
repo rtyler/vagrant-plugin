@@ -7,3 +7,8 @@ maintained by [Christopher Orr](https://github.com/orrc).
 
 
 ![A Screenshot](http://agentdero.cachefly.net/scratch/vagrant-plugin-0.0.3.png)
+
+
+### Screencasts
+
+* *[Introduction to the Vagrant plugin](http://youtu.be/2o590cmra0g)*
