@@ -7,7 +7,7 @@ Jenkins::Plugin::Specification.new do |plugin|
 
   plugin.url = 'https://wiki.jenkins-ci.org/display/JENKINS/Vagrant+Plugin'
   plugin.developed_by 'rtyler', 'R. Tyler Croy <tyler@linux.com>'
-  plugin.uses_repository :github => 'vagrant-plugin'
+  plugin.uses_repository :github => 'rtyler/vagrant-plugin'
 
   plugin.depends_on 'ruby-runtime', '0.9'
 end
