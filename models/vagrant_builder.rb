@@ -15,30 +15,61 @@ module Vagrant
         build.halt "OH CRAP! I don't seem to have a Vagrant instance!"
       end
 
-      unless @vagrant.primary_vm.state == :running
-        build.halt 'Vagrant VM doesn\'t appear to be running!'
+      if @vagrant.multivm?
+          perform_multi_vm(build, launcher, listener)
+      else
+          perform_single_vm(build, launcher, listener)
       end
+    end
 
-      listener.info("Running the command in Vagrant with \"#{vagrant_method.to_s}\":")
-      @command.split("\n").each do |line|
-        listener.info("+ #{line}")
-      end
+    def perform_single_vm(build, launcher, listener)
+        unless @vagrant.primary_vm.state == :running
+            build.halt "Vagrant VM doesn't appear to be running!"
+        end
 
-      unless @vagrant.nil?
-        build.env[:vagrant_dirty] = true
+        listener.info("Running the command in Vagrant with \"#{vagrant_method.to_s}\":")
+        @command.split("\n").each do |line|
+            listener.info("+ #{line}")
+        end
+
         code = @vagrant.primary_vm.channel.send(vagrant_method, @command) do |type, data|
-          # type is one of [:stdout, :stderr, :exit_status]
-      #   # data is a string for stdout/stderr and an int for exit status
-          if type == :stdout
-            listener.info data
-          elsif type == :stderr
-            listener.error data
-          end
+        # type is one of [:stdout, :stderr, :exit_status]
+        # data is a string for stdout/stderr and an int for exit status
+            if type == :stdout
+                listener.info data
+            elsif type == :stderr
+                listener.error data
+            end
         end
         unless code == 0
-          build.halt 'Command failed!'
+            build.halt 'Command failed!'
         end
-      end
+    end
+
+    def perform_multi_vm(build, launcher, listener)
+        @vagrant.vms.each do |name, vm|
+            unless vm.state == :running
+                build.halt "Vagrant VM #{name} doesn't appear to be running!"
+            end
+
+            listener.info("Running the command in Vagrant on VM #{name} with \"#{vagrant_method.to_s}\":")
+            @command.split("\n").each do |line|
+                listener.info("+ #{line}")
+            end
+
+            code = vm.channel.send(vagrant_method, @command) do |type, data|
+            # type is one of [:stdout, :stderr, :exit_status]
+            # data is a string for stdout/stderr and an int for exit status
+                if type == :stdout
+                    listener.info data
+                elsif type == :stderr
+                    listener.error data
+                end
+            end
+            unless code == 0
+                build.halt 'Command failed!'
+            end
+        end
     end
   end
 
@@ -75,7 +106,7 @@ module Vagrant
   end
 
   class ProvisionBuilder < Jenkins::Tasks::Builder
-    display_name 'Provision the Vagrant machine'
+    display_name 'Provision the Vagrant VM(s)'
 
     def initialize(attrs)
     end
@@ -89,13 +120,21 @@ module Vagrant
         built.halt "OH CRAP! I don't seem to have a Vagrant instance"
       end
 
-      unless @vagrant.primary_vm.state == :running
-        build.halt 'Vagrant VM doesn\'t appear to be running!'
+      if @vagrant.multivm?
+          @vagrant.vms.each do |name, vm|
+              unless vm.state == :running
+                  build.halt "Vagrant VM #{name} doesn't appear to be running!"
+              end
+              listener.info("Provisioning the Vagrant VM #{name}.. (this may take a while)")
+              @vagrant.cli('provision', "#{name}")
+          end
+      else
+        unless @vagrant.primary_vm.state == :running
+            build.halt "Vagrant VM doesn't appear to be running!"
+        end
+        listener.info("Provisioning the Vagrant VM.. (this may take a while)")
+        @vagrant.cli('provision')
       end
-
-      listener.info('Provisioning the Vagrant VM.. (this may take a while)')
-      build.env[:vagrant_dirty] = true
-      @vagrant.cli('provision')
     end
   end
 end
