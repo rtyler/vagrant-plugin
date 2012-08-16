@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'vagrant'
+require 'lockfile'
+require 'tmpdir'
 
 module Vagrant
   # This will handle proxying output from Vagrant into Jenkins
@@ -64,7 +66,12 @@ module Vagrant
       @vagrant.ui.listener = listener
 
       listener.info "Vagrantfile loaded, bringing Vagrant box up for the build"
-      @vagrant.cli('up', '--no-provision')
+      # Vagrant doesn't currently implement any locking, neither does
+      # VBoxManage, and it will fail if importing two boxes concurrently, so use
+      # a file lock to make sure that doesn't happen.
+      Lockfile.new(File.join(Dir.tmpdir, ".vagrant-jenkins-plugin.lock")) do
+        @vagrant.cli('up', '--no-provision')
+      end
       listener.info "Vagrant box is online, continuing with the build"
 
       build.env[:vagrant] = @vagrant
