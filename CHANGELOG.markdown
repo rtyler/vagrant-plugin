@@ -2,7 +2,7 @@
 
 ### 0.1.5
 
-* update Vagrant to 1.0.6.dev
+* update Vagrant to 1.0.6.dev (support for VirtualBox 4.2)
 
 ### 0.1.4
 
