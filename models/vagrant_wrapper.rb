@@ -8,7 +8,7 @@ module Vagrant
   class ConsoleInterface
     attr_accessor :listener, :resource
 
-    def initializer(resource)
+    def initialize(resource)
       @listener = nil
       @resource = resource
     end
