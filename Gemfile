@@ -8,7 +8,7 @@ gem 'jruby-openssl', '~> 0.8.4'
 gem 'lockfile'
 
 group :development do
-  gem 'jpi', '~> 0.3.3'
+  gem 'jpi'
   gem 'rspec'
   gem 'rake'
 end
